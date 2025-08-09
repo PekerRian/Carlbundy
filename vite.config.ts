@@ -10,7 +10,11 @@ export default defineConfig({
     }),
     commonjs({
       requireReturnsDefault: 'auto',
-      transformMixedEsModules: true
+      transformMixedEsModules: true,
+      dynamicRequireTargets: [
+        'node_modules/aptos/**/*.js',
+        'node_modules/@noble/**/*.js'
+      ]
     })
   ],
   build: {
@@ -19,13 +23,20 @@ export default defineConfig({
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'crypto-vendor': ['tweetnacl', '@noble/hashes/hmac', '@noble/hashes/sha512']
         }
       },
       external: ['eventemitter3']
     }
   },
   optimizeDeps: {
-    include: ['petra-plugin-wallet-adapter', 'eventemitter3'],
+    include: [
+      'petra-plugin-wallet-adapter',
+      'eventemitter3',
+      'tweetnacl',
+      '@noble/hashes/hmac',
+      '@noble/hashes/sha512'
+    ],
     esbuildOptions: {
       target: 'es2020'
     }
@@ -36,6 +47,11 @@ export default defineConfig({
     strictPort: true,
     headers: {
       "Access-Control-Allow-Origin": "*"
+    }
+  },
+  resolve: {
+    alias: {
+      'tweetnacl': 'tweetnacl/nacl-fast.js'
     }
   }
 })
