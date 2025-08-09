@@ -15,11 +15,14 @@ export default defineConfig({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
-  },
-  resolve: {
-    alias: {
-      'petra-plugin-wallet-adapter': require.resolve('petra-plugin-wallet-adapter'),
-    },
+    rollupOptions: {
+      external: ['petra-plugin-wallet-adapter'],
+      output: {
+        globals: {
+          'petra-plugin-wallet-adapter': 'PetraPluginWalletAdapter'
+        }
+      }
+    }
   },
   optimizeDeps: {
     esbuildOptions: {
