@@ -1,0 +1,23 @@
+/* Connected state styles */
+.connect-btn,
+.disconnect-btn,
+.buy-ticket-btn,
+.wallet-text {
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.wallet-connected .connect-btn,
+.wallet-connected .disconnect-btn,
+.wallet-connected .buy-ticket-btn,
+.wallet-connected .wallet-text {
+  color: #39ff14;
+  text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14;
+}
+
+.wallet-disconnected .connect-btn,
+.wallet-disconnected .disconnect-btn,
+.wallet-disconnected .buy-ticket-btn,
+.wallet-disconnected .wallet-text {
+  color: #4a4a4a;
+  text-shadow: none;
+}

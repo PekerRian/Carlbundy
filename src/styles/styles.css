@@ -1,0 +1,443 @@
+.connect-btn, .disconnect-btn {
+  margin-top: 0.5rem;
+  min-width: 240px;
+  min-height: 64px;
+  font-size: 1.5rem;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 800;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  letter-spacing: 1px;
+  z-index: 10;
+  cursor: pointer;
+}
+.connect-btn {
+  margin-top: 0.5rem;
+  min-width: 240px;
+  min-height: 64px;
+  font-size: 1.5rem;
+}
+/* WalletStatus parent container for proper layout @media scr@media screen and (max-width: 768px) {
+  .center-container {
+    width: 100%;
+    height: auto;
+    aspect-rati  .buy-ticket-top-boxes > .buy-ticket-box:nth-of-type(2) {
+    font-size: 1.2rem;
+  }
+
+  .buy-ticket-top-boxes > .buy-ticket-box:nth-of-type(3) {
+    font-size: 1rem;
+    top: 160px;
+  }   max-width: 800px;
+    margin-top: 2rem;
+  }(max-width: 768px) {
+  .center-containe@media screen and (max-width: 480px) {
+  .center-container {
+    max-width: 700px;
+    padding: 1rem;
+    margin-top: 8rem;
+  }    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    max-width: 800px;
+    margin-top: 6rem;
+  }let-status-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+  pointer-events: auto;
+}
+.button:hover,
+.buy-ticket-btn:hover,
+.connect-btn:hover,
+.disconnect-btn:hover {
+  cursor: pointer;
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+.buy-ticket-btn:active ~ .center-container::after {
+  animation: hideImage 0.4s ease;
+}
+
+@keyframes hideImage {
+  0%, 100% {
+    opacity: 1;
+  }
+  1%, 99% {
+    opacity: 0;
+  }
+}
+
+/* Basic futuristic button style for visibility */
+.futuristic-button {
+  background: rgba(30, 30, 30, 0.85);
+  border: 2px solid #39ff14;
+  box-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14;
+  border-radius: 1rem;
+  transition: box-shadow 0.3s;
+}
+.buy-ticket-timer-text {
+  font-size: 4rem;
+}
+@font-face {
+  font-family: 'Analog';
+  src: url('/analog.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.buy-ticket-sidebox {
+  position: absolute;
+  left: 50%;
+  font-size: 30px;
+  top: 65px;
+  transform: translateX(20%);
+  font-family: 'Analog', 'Inter', sans-serif;
+  color: #39ff14;
+  text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14, 0 0 32px #39ff14;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  width: 160px;
+  white-space: pre-line;
+  text-align: center;
+  z-index: 4;
+}
+.center-content-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin-top: -165px;
+  opacity: 1;
+  z-index: 3;
+}
+
+/* Row for buy button and textbox side by side */
+.buy-ticket-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  position: relative;
+}
+
+
+/* Row for Box 1A and Box 1B above vertical boxes */
+ .buy-ticket-box-row {
+  display: flex;
+  flex-direction: row;
+  gap: 6rem;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+/* Top boxes above buy button and textbox */
+ .buy-ticket-top-boxes {
+  position: relative;
+  height: 160px;
+  margin-bottom: 15rem;
+  margin-top: -4rem;
+  
+  
+.buy-ticket-top-boxes > .buy-ticket-box:nth-of-type(1) {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+  z-index: 3;
+}
+
+/* Move only Box 2 lower in the vertical stack */
+.buy-ticket-top-boxes > .buy-ticket-box:nth-of-type(2) {
+  margin-top: 0.5rem;
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  white-space: nowrap;
+}
+
+.buy-ticket-top-boxes > .buy-ticket-box:nth-of-type(3) {
+  margin-top: 0.5rem;
+  position: absolute;
+  left: 50%;
+  top: 220px;
+  transform: translateX(-50%);
+  font-size: 2rem;
+}
+.buy-ticket-row {
+
+}
+.buy-ticket-row input[type="text"],
+.buy-ticket-row input[type="number"] {
+  margin-left: 0px;
+}
+/* Add a unique class for the textbox to allow independent positioning */
+.buy-ticket-textbox {
+  position: relative;
+  transform: translateX(-2rem);
+}
+
+
+
+ .buy-ticket-box {
+  background: none;
+  color: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  padding: 1.5rem 2rem;
+  font-weight: bold;
+  text-align: center;
+  font-size: 15px;
+  min-width: 80px;
+  min-height: 20px;
+  font-family: 'Analog', 'Inter', sans-serif;
+  
+  color: #39ff14;
+  text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14, 0 0 32px #39ff14;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+html, body, #root {
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
+	font-family: 'Inter', sans-serif;
+	color: #f4f4f5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: url('/wall.png') no-repeat center center fixed;
+	background-size: cover;
+  opacity: 1;
+}
+/* Container for Buy Ticket and Textbox */
+.buy-ticket-container {
+  margin-top:-24rem;
+}
+
+.buy-ticket-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.buy-ticket-wrapper .buy-ticket-btn {
+  position: absolute;
+  z-index: 4;
+  transform: translate(-7.5rem, 9rem);
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  cursor: pointer;
+  opacity: 0;
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  border-radius: 1.25rem;
+  box-shadow: 0 0 24px 0 rgba(0,0,0,0.12);
+  width: 800px;
+  height: 800px;
+  margin-top: 4rem;
+}
+
+.center-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/bundyclock2.PNG') no-repeat center center;
+  background-size: contain;
+  z-index: 1;
+
+  
+
+}
+
+.center-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/bundyclock1.PNG') no-repeat center center;
+  background-size: contain;
+  z-index: 2;
+}
+
+/* When button is clicked */
+.buy-ticket-btn:active + .center-container::after,
+.buy-ticket-btn:active ~ .center-container::after {
+  animation: flashHide 0.4s steps(1);
+}
+
+@keyframes flashHide {
+  0% { visibility: visible; }
+  1% { visibility: hidden; }
+  100% { visibility: visible; }
+}
+
+
+
+.center-container .card {
+	background: transparent;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  .center-container {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    max-width: 768px;
+    margin-top: 8rem;
+	background-size: 100% 50%;
+  }
+
+
+
+
+  
+  .buy-ticket-container {
+    margin-top: -12rem;
+  }
+
+
+  .buy-ticket-wrapper .buy-ticket-btn {
+    width: 150px;
+    height: 150px;
+    transform: translate(-4rem, 8rem);
+    font-size: 1rem;
+  }
+
+  .buy-ticket-sidebox {
+
+    font-size: 20px;
+    width: 120px;
+    transform: translateX(10%);
+  }
+
+  .buy-ticket-top-boxes {
+    margin-bottom: 10.5rem;
+  }
+
+  .buy-ticket-top-boxes > .buy-ticket-box:nth-of-type(2) {
+    font-size: 2rem;
+	margin-top:-0.5rem;
+    top: 65px;
+     transform: translateX(-60%);
+	
+  }
+
+  .buy-ticket-top-boxes > .buy-ticket-box:nth-of-type(3) {
+    font-size: 1.5rem;
+    top: 180px;
+	margin-top:-1.70rem;
+     transform: translateX(-60%);
+  }
+
+  .connect-btn, .disconnect-btn {
+    min-width: 200px;
+    min-height: 48px;
+    font-size: 1.2rem;
+  }
+
+  .buy-ticket-timer-text {
+    font-size: 3rem;
+  }
+}
+
+
+
+/* Small Mobile Devices */
+@media screen and (max-width: 480px) {
+  .center-container {
+    width: 100%;
+    height: 100vw;
+    max-width: 480px;
+    max-height: 480px;
+    padding: 1rem;
+    overflow: visible;
+	background-size: 70% 100%;
+  
+
+  }
+
+  .center-container::before,
+  .center-container::after {
+    background-size: 70% 100%;
+    background-position: center;
+    width: 135%;
+    height: 120%;
+    left: -21%;
+    top: -10%;
+  }
+
+  .buy-ticket-box-row {
+    gap: 3rem;
+    width: 100%;
+    justify-content: space-evenly;
+  transform: translateX(-4%);
+  }
+
+  .buy-ticket-container {
+    margin-top: -10rem;
+  }
+
+  .buy-ticket-wrapper .buy-ticket-btn {
+    width: 120px;
+    height: 120px;
+    transform: translate(-7rem, 8.7rem);
+    font-size: 0.9rem;
+  }
+
+  .buy-ticket-sidebox {
+    font-size: 16px;
+    width: 100px;
+	transform: translate(0.5rem,-7rem);
+  }
+
+  .buy-ticket-top-boxes > .buy-ticket-box:nth-of-type(2) {
+    font-size: 1.2rem;
+  }
+
+  .buy-ticket-top-boxes > .buy-ticket-box:nth-of-type(3) {
+    font-size: 1.2rem;
+    top: 160px;
+  }
+
+  .buy-ticket-timer-text {
+    font-size: 2.5rem;
+  }
+
+  .buy-ticket-box {
+    padding: 1rem 1.5rem;
+  }
+}

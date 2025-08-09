@@ -1,0 +1,48 @@
+/* Base button styles */
+.base-button {
+  margin-top: 0.5rem;
+  min-width: 240px;
+  min-height: 64px;
+  font-size: 1.5rem;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 800;
+  letter-spacing: 1px;
+  z-index: 10;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Connected state styles */
+.wallet-connected {
+  color: #39ff14;
+  text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14;
+}
+
+.wallet-connected-bright {
+  color: #39ff14;
+  text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14, 0 0 32px #39ff14;
+}
+
+/* Disconnected state styles */
+.wallet-disconnected {
+  color: #4a4a4a;
+  text-shadow: none;
+}
+
+/* Buy button styles */
+.buy-ticket-btn {
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+/* Buy button states */
+.buy-ticket-btn.wallet-connected {
+  color: #39ff14;
+  text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14, 0 0 32px #39ff14;
+}
+
+.buy-ticket-btn.wallet-disconnected {
+  color: #4a4a4a;
+  text-shadow: none;
+}
