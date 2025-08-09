@@ -20,11 +20,12 @@ export default defineConfig({
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
         }
-      }
+      },
+      external: ['eventemitter3']
     }
   },
   optimizeDeps: {
-    include: ['petra-plugin-wallet-adapter'],
+    include: ['petra-plugin-wallet-adapter', 'eventemitter3'],
     esbuildOptions: {
       target: 'es2020'
     }
