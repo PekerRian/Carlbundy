@@ -1,17 +1,24 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import commonjs from '@rollup/plugin-commonjs'
 
 export default defineConfig({
   plugins: [
     react({
       jsxImportSource: 'react',
       tsDecorators: true,
-    })
+    }),
+    commonjs()
   ],
   build: {
     target: 'es2020',
-    rollupOptions: {
-      external: ['petra-plugin-wallet-adapter'],
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+  },
+  resolve: {
+    alias: {
+      'petra-plugin-wallet-adapter': require.resolve('petra-plugin-wallet-adapter'),
     },
   },
   optimizeDeps: {
@@ -20,7 +27,6 @@ export default defineConfig({
     }
   },
   server: {
-    https: false,
     port: 5173,
     host: true,
     strictPort: true,
