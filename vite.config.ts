@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import commonjs from '@rollup/plugin-commonjs'
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 export default defineConfig({
   plugins: [
@@ -10,11 +11,15 @@ export default defineConfig({
     }),
     commonjs({
       requireReturnsDefault: 'auto',
-      transformMixedEsModules: true,
-      dynamicRequireTargets: [
-        'node_modules/aptos/**/*.js',
-        'node_modules/@noble/**/*.js'
-      ]
+      transformMixedEsModules: true
+    }),
+    nodePolyfills({
+      globals: {
+        Buffer: true,
+        global: true,
+        process: true
+      },
+      protocolImports: true
     })
   ],
   build: {
@@ -22,11 +27,16 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'crypto-vendor': ['tweetnacl', '@noble/hashes/hmac', '@noble/hashes/sha512']
+          'react-vendor': ['react', 'react-dom', 'react-router-dom']
         }
       },
-      external: ['eventemitter3']
+      external: [
+        'eventemitter3',
+        'tweetnacl',
+        '@noble/hashes/hmac',
+        '@noble/hashes/sha512',
+        'aptos'
+      ]
     }
   },
   optimizeDeps: {
@@ -51,7 +61,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      'tweetnacl': 'tweetnacl/nacl-fast.js'
+      'tweetnacl': 'tweetnacl/nacl-fast.js',
+      '@noble/hashes': '@noble/hashes/dist/index.js'
     }
   }
 })
