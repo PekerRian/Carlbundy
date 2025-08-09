@@ -9,6 +9,7 @@ export default defineConfig({
     })
   ],
   build: {
+    target: 'es2020',
     rollupOptions: {
       external: ['petra-plugin-wallet-adapter'],
     },
@@ -17,9 +18,6 @@ export default defineConfig({
     esbuildOptions: {
       target: 'es2020'
     }
-  },
-  build: {
-    target: 'es2020'
   },
   server: {
     https: false,
