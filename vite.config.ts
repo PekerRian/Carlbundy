@@ -8,6 +8,11 @@ export default defineConfig({
       tsDecorators: true,
     })
   ],
+  build: {
+    rollupOptions: {
+      external: ['petra-plugin-wallet-adapter'],
+    },
+  },
   optimizeDeps: {
     esbuildOptions: {
       target: 'es2020'
