@@ -44,8 +44,7 @@ export default defineConfig({
       'eventemitter3',
       'tweetnacl',
       '@noble/hashes/hmac',
-      '@noble/hashes/sha512',
-      'aptos'
+      '@noble/hashes/sha512'
     ],
     esbuildOptions: {
       target: 'es2020'
