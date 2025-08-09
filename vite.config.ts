@@ -15,16 +15,9 @@ export default defineConfig({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
-    rollupOptions: {
-      external: ['petra-plugin-wallet-adapter'],
-      output: {
-        globals: {
-          'petra-plugin-wallet-adapter': 'PetraPluginWalletAdapter'
-        }
-      }
-    }
   },
   optimizeDeps: {
+    include: ['petra-plugin-wallet-adapter'],
     esbuildOptions: {
       target: 'es2020'
     }
