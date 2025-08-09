@@ -8,13 +8,20 @@ export default defineConfig({
       jsxImportSource: 'react',
       tsDecorators: true,
     }),
-    commonjs()
+    commonjs({
+      requireReturnsDefault: 'auto',
+      transformMixedEsModules: true
+    })
   ],
   build: {
     target: 'es2020',
-    commonjsOptions: {
-      transformMixedEsModules: true,
-    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+        }
+      }
+    }
   },
   optimizeDeps: {
     include: ['petra-plugin-wallet-adapter'],
