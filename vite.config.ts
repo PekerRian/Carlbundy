@@ -11,14 +11,19 @@ export default defineConfig({
   optimizeDeps: {
     esbuildOptions: {
       target: 'es2020'
-    }
+    },
+    include: ['petra-plugin-wallet-adapter']
   },
   build: {
     target: 'es2020',
+    commonjsOptions: {
+      include: [/petra-plugin-wallet-adapter/, /node_modules/]
+    },
     rollupOptions: {
+      external: ['@telegram-apps/bridge'],
       output: {
-        globals: {
-          'petra-plugin-wallet-adapter': 'PetraWallet'
+        manualChunks: {
+          vendor: ['petra-plugin-wallet-adapter', '@aptos-labs/wallet-adapter-react']
         }
       }
     }
