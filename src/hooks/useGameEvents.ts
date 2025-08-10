@@ -1,10 +1,26 @@
 import { useEffect, useState } from 'react';
-import { Aptos, AptosConfig, Network } from '@aptos-labs/ts-sdk';
+import { 
+  Aptos, 
+  AptosConfig, 
+  Network, 
+  InputViewRequestData 
+} from '@aptos-labs/ts-sdk';
 import { MODULE_ADDRESS, MODULE_NAME } from '../App';
 
-// Initialize Aptos client
-const config = new AptosConfig({ network: Network.MAINNET });
-const aptos = new Aptos(config);
+declare global {
+  interface ImportMeta {
+    env: {
+      VITE_APTOS_API_KEY: string;
+    };
+  }
+}
+
+// Initialize Aptos client with default testnet configuration
+const config = new AptosConfig({ 
+  network: Network.TESTNET 
+});
+
+const client = new Aptos(config);
 
 export const useGameEvents = (gameId: string) => {
   const [lastBuyer, setLastBuyer] = useState<string | null>(null);
@@ -14,68 +30,71 @@ export const useGameEvents = (gameId: string) => {
   const [winner, setWinner] = useState<string | null>(null);
 
   useEffect(() => {
-    let eventStream: EventSource | null = null;
+    let intervalId: NodeJS.Timeout | null = null;
 
-    const subscribeToEvents = async () => {
+    const fetchEvents = async () => {
       try {
-        // Create event stream for game events
-        const eventStreamUrl = await aptos.getEventStream({
-          query: {
-            addr: MODULE_ADDRESS,
-            module: MODULE_NAME,
-            eventType: 'GameEvent',
-            start: BigInt(Date.now())
+        // First get the resource address
+        const result = await client.view({
+          payload: {
+            function: `${MODULE_ADDRESS}::${MODULE_NAME}::get_resource_address`,
+            typeArguments: [],
+            functionArguments: [gameId]
           }
         });
 
-        eventStream = new EventSource(eventStreamUrl);
+        const resourceAccount = result[0] as string;
+        if (!resourceAccount) {
+          console.error('Resource account not found');
+          return;
+        }
 
-        // Listen for game events
-        eventStream.onmessage = (event) => {
-          const data = JSON.parse(event.data);
-          
-          // Handle different event types
-          switch (data.type) {
-            case 'ticket_purchase':
-              setLastBuyer(data.buyer);
-              setPrizePool(data.prize_pool);
-              setTimeLeft(data.time_left);
-              break;
-            case 'game_start':
-              setIsGameActive(true);
-              setTimeLeft(data.duration);
-              setPrizePool(0);
-              setLastBuyer(null);
-              setWinner(null);
-              break;
-            case 'game_end':
-              setIsGameActive(false);
-              setWinner(data.winner);
-              break;
+        // Then get the game state
+        const stateResult = await client.view({
+          payload: {
+            function: `${MODULE_ADDRESS}::${MODULE_NAME}::get_game_state`,
+            typeArguments: [],
+            functionArguments: [resourceAccount]
           }
-        };
+        });
 
-        // Handle connection errors
-        eventStream.onerror = (error) => {
-          console.error('EventStream error:', error);
-          eventStream?.close();
-          // Attempt to reconnect after a delay
-          setTimeout(subscribeToEvents, 5000);
-        };
-
+        if (stateResult && Array.isArray(stateResult)) {
+          const [creator, total_deposit, ticket_price, timer_end, last_buyer, started] = stateResult;
+          
+          // Convert address to string
+          const buyerAddress = (last_buyer as { address: string })?.address || null;
+          setLastBuyer(buyerAddress);
+          
+          // Convert numbers
+          setPrizePool(Number(total_deposit));
+          
+          // Calculate time left
+          const currentTime = Math.floor(Date.now() / 1000);
+          const timerEndNum = Number(timer_end);
+          const timeRemaining = timerEndNum - currentTime;
+          setTimeLeft(timeRemaining > 0 ? timeRemaining : 0);
+          
+          // Convert boolean
+          setIsGameActive(Boolean(started));
+          
+          // If game is not active and we have a last buyer, they might be the winner
+          if (!started && buyerAddress && buyerAddress !== gameId) {
+            setWinner(buyerAddress);
+          }
+        }
       } catch (error) {
-        console.error('Failed to subscribe to events:', error);
-        // Attempt to reconnect after a delay
-        setTimeout(subscribeToEvents, 5000);
+        console.error('Failed to fetch game state:', error);
       }
     };
 
-    subscribeToEvents();
+    // Poll for events every 5 seconds
+    intervalId = setInterval(fetchEvents, 5000);
+    fetchEvents(); // Initial fetch
 
     // Cleanup on unmount
     return () => {
-      if (eventStream) {
-        eventStream.close();
+      if (intervalId) {
+        clearInterval(intervalId);
       }
     };
   }, [gameId]);
