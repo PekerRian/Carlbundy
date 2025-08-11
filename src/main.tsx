@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { PetraWallet } from 'petra-plugin-wallet-adapter';
 import { AptosWalletAdapterProvider } from '@aptos-labs/wallet-adapter-react';
 import { Network } from '@aptos-labs/ts-sdk';
 import App from './App';
@@ -12,12 +13,17 @@ if (!container) {
 
 const root = ReactDOM.createRoot(container);
 
+const wallets = [new PetraWallet()];
+
 root.render(
   <React.StrictMode>
     <AptosWalletAdapterProvider 
+      plugins={wallets}
       autoConnect={true}
-      optInWallets={["Petra"]}
-      onError={(error: Error) => {
+      dappConfig={{
+        network: Network.TESTNET,
+      }}
+      onError={(error) => {
         console.error("Wallet adapter error:", error);
       }}
     >

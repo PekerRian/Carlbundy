@@ -11,19 +11,18 @@ export default defineConfig({
   optimizeDeps: {
     esbuildOptions: {
       target: 'es2020'
-    }
+    },
+      // include: ['petra-plugin-wallet-adapter']
   },
   build: {
     target: 'es2020',
-    commonjsOptions: {
-      include: [/node_modules/]
-    },
     rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['@aptos-labs/wallet-adapter-react', '@aptos-labs/wallet-adapter-core']
-        }
-      }
+        // external: ['petra-plugin-wallet-adapter'],
+        // output: {
+        //   globals: {
+        //     'petra-plugin-wallet-adapter': 'PetraWallet'
+        //   }
+        // }
     }
   },
   server: {

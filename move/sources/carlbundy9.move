@@ -1,4 +1,4 @@
-module carl8::carlbundy8 {
+module carl9::carlbundy9 {
     use aptos_framework::event;
     use aptos_framework::coin;
     use aptos_framework::timestamp;
@@ -51,8 +51,7 @@ module carl8::carlbundy8 {
         borrow_global<CreatorData>(creator_addr).resource_address
     }
 
-    #[test_only]
-    /// Get game state for testing
+    /// Get game state - returns (creator, total_deposit, ticket_price, timer_end, last_buyer, started)
     public fun get_game_state(resource_addr: address): (address, u64, u64, u64, address, bool) acquires Game {
         let game = borrow_global<Game>(resource_addr);
         (
@@ -78,7 +77,7 @@ module carl8::carlbundy8 {
     }
 
     /// Initialize or restart the game
-    public entry fun initialize_game(creator: &signer, ticket_price: u64, initial_deposit: u64) acquires CreatorData, Game {
+    public entry fun initialize_game(creator: &signer, ticket_price: u64, initial_deposit: u64, game_id: vector<u8>) acquires CreatorData, Game {
         let creator_addr = signer::address_of(creator);
         
         // Basic input validation
@@ -93,9 +92,9 @@ module carl8::carlbundy8 {
 
         // Initialize first time setup if needed
         if (!exists<CreatorData>(creator_addr)) {
-            // This will fail automatically if resource account exists
-            let (resource_signer, resource_signer_cap) = account::create_resource_account(creator, x"DEADC0DE33");
-            let resource_addr = account::create_resource_address(&creator_addr, x"DEADC0DE33");
+            // Use game_id as seed for unique resource accounts
+            let (resource_signer, resource_signer_cap) = account::create_resource_account(creator, game_id);
+            let resource_addr = account::create_resource_address(&creator_addr, game_id);
             
             // Register resource account to handle APT
             coin::register<AptosCoin>(&resource_signer);

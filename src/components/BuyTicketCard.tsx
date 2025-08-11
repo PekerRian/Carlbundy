@@ -91,12 +91,17 @@ export function BuyTicketCard({
             {/* 3 boxes above the buy button and textbox */}
             <div className="buy-ticket-top-boxes">
               <div className="buy-ticket-box-row">
-                <div className="buy-ticket-box">Prize Pool: {prizePool ?? 0} APT</div>
-                <div className="buy-ticket-box">Ticket Price: {ticketPrice ?? 0} APT</div>
+                <div className="buy-ticket-box">Prize Pool: {((prizePool ?? 0) / 1e8).toFixed(2)} APT</div>
+                <div className="buy-ticket-box">Ticket Price: {((ticketPrice ?? 0) / 1e8).toFixed(2)} APT</div>
               </div>
-              <div className="buy-ticket-box buy-ticket-timer-text">Timer: {formatTime(timeLeft)}</div>
+              <div className="buy-ticket-box buy-ticket-timer-text">
+                Timer: {formatTime(timeLeft)}
+                {timeLeft !== undefined && timeLeft > 0 && (
+                  <span className="timer-status"> (Active)</span>
+                )}
+              </div>
               <div className="buy-ticket-box">
-                {gameStarted && !gameEnded
+                {gameStarted && timeLeft && timeLeft > 0
                   ? `Last Buy: ${formatAddress(lastBuyer)}`
                   : `Winner: ${formatAddress(winner)}`}
               </div>

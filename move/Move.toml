@@ -1,11 +1,11 @@
 [package]
-name = "carlsbundy8"
+name = "carlbundy9"
 version = "0.1.0"
 upgrade_policy = "compatible"
 
 
 [addresses]
-carl8 = "720757d34c77743730715fcf091f456e6840e32a077014d6883983ff7323c3ea"
+carl9 = "720757d34c77743730715fcf091f456e6840e32a077014d6883983ff7323c3ea"
 
 [dependencies]
 AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework", rev = "mainnet" }

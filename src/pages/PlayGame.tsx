@@ -76,25 +76,16 @@ export function PlayGame() {
     }
   };
 
-  // Timer effect and game state polling
+  // Debug logging for state updates
   useEffect(() => {
-    if (!connected || !gameState.isInitialized) return;
-    
-    const pollInterval = setInterval(() => {
-      if (started && timeLeft && timeLeft > 0) {
-        fetchGameState();
-      }
-    }, 10000);
-
-    return () => {
-      clearInterval(pollInterval);
-    };
-  }, [gameState.isInitialized, connected, started, timeLeft]);
-
-  useEffect(() => {
-    if (connected) fetchGameState();
-    // eslint-disable-next-line
-  }, [connected]);
+    console.log('Game State Update:', {
+      prizePool,
+      timeLeft,
+      started,
+      lastBuyer,
+      winner
+    });
+  }, [prizePool, timeLeft, started, lastBuyer, winner]);
 
   // Buy ticket
   const handleBuyTicket = async () => {
@@ -140,13 +131,13 @@ export function PlayGame() {
             onBuyTicket={handleBuyTicket}
             isLoading={loading}
             disabled={!connected || loading}
-            gameEnded={!gameState.started}
-            gameStarted={gameState.started}
-            prizePool={Number(gameState.totalDeposit) / 1e8}
+            gameEnded={!started}
+            gameStarted={started}
+            prizePool={Number(prizePool)}
             ticketPrice={Number(gameState.ticketPrice) / 1e8}
-            timeLeft={timeLeft}
-            lastBuyer={gameState.lastBuyer}
-            winner={gameState.winner}
+            timeLeft={Number(timeLeft)}
+            lastBuyer={lastBuyer || ''}
+            winner={winner || ''}
           />
         </div>
       </div>
