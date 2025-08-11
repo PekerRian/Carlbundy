@@ -16,6 +16,7 @@ root.render(
   <React.StrictMode>
     <AptosWalletAdapterProvider 
       autoConnect={true}
+      optInWallets={["Petra"]}
       onError={(error: Error) => {
         console.error("Wallet adapter error:", error);
       }}
