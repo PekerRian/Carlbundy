@@ -15,7 +15,6 @@
     "@aptos-labs/wallet-adapter-react": "^7.0.4",
     "@types/lodash": "^4.17.20",
     "lodash": "^4.17.21",
-    "petra-plugin-wallet-adapter": "^0.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.7.1"
