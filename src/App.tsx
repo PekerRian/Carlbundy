@@ -18,33 +18,68 @@ const App: React.FC = () => {
   const { connected } = useWallet();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const hasInteractedRef = useRef(false);
+  const [muted, setMuted] = React.useState(false);
 
   const playMusic = () => {
     if (audioRef.current && !hasInteractedRef.current) {
+      audioRef.current.volume = 0.5;
+      audioRef.current.muted = muted;
       audioRef.current.play();
       hasInteractedRef.current = true;
     }
-  };
+  }
 
   useEffect(() => {
     const handleInteraction = () => playMusic();
-    
-    // Add event listeners for both mouse movement and touch
     document.addEventListener('mousemove', handleInteraction);
     document.addEventListener('touchstart', handleInteraction);
-
-    // Cleanup event listeners
     return () => {
       document.removeEventListener('mousemove', handleInteraction);
       document.removeEventListener('touchstart', handleInteraction);
     };
-  }, []);
+  }, [muted]);
+
+  // Update mute state when toggled
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.muted = muted;
+    }
+  }, [muted]);
+
+  const muteBtnStyle: React.CSSProperties = {
+    position: 'fixed',
+    top: 20,
+    right: 20,
+    zIndex: 2000,
+    background: muted ? '#222' : '#000',
+    color: muted ? '#f44' : '#0ff',
+    border: `2px solid ${muted ? '#f44' : '#0ff'}`,
+    borderRadius: '50%',
+    width: 48,
+    height: 48,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 24,
+    fontFamily: 'Analog, monospace',
+    boxShadow: muted ? '0 0 10px #f44' : '0 0 10px #0ff',
+    cursor: 'pointer',
+    transition: 'all 0.3s',
+    outline: 'none',
+  };
 
   return (
     <div className={`text-text-primary app-fixed-bg ${connected ? 'wallet-connected' : 'wallet-disconnected'}`}>
       <audio ref={audioRef} loop>
         <source src="/C.A.R.L..mp3" type="audio/mpeg" />
       </audio>
+      <button
+        style={muteBtnStyle}
+        aria-label={muted ? 'Unmute music' : 'Mute music'}
+        onClick={() => setMuted((m) => !m)}
+      >
+        {muted ? <span>&#128263;</span> : <span>&#128266;</span>}
+      </button>
       {/* Show different overlays based on wallet connection state */}
       {connected ? (
         <>

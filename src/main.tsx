@@ -17,7 +17,7 @@ root.render(
     <AptosWalletAdapterProvider 
       autoConnect={true}
       dappConfig={{
-        network: Network.TESTNET,
+        network: Network.MAINNET,
       }}
       onError={(error) => {
         console.error("Wallet adapter error:", error);
