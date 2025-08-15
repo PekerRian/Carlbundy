@@ -21,14 +21,14 @@ const resourceAddressCache = new Map<string, string>();
 
 // Initialize Aptos client with fallback nodes - using only one stable node to avoid rate limits
 const FALLBACK_NODES = [
-  "https://fullnode.testnet.aptoslabs.com/v1"
+  "https://fullnode.mainnet.aptoslabs.com/v1"
 ];
 
 let currentNodeIndex = 0;
 
 const createClient = () => {
   const config = new AptosConfig({
-    network: Network.TESTNET,
+    network: Network.MAINNET,
     fullnode: FALLBACK_NODES[currentNodeIndex],
     indexer: 'aptoslabs_iUyyvuxoBw6_PGJFR9c1aQREriFXBZTT1JUPdYX6kDhXV'
   });
