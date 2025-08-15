@@ -135,7 +135,7 @@ export function PlayGame() {
             gameEnded={!started}
             gameStarted={started}
             prizePool={Number(prizePool)}
-            ticketPrice={Number(ticketPrice) / 1e8}
+            ticketPrice={ticketPrice}
             timeLeft={Number(timeLeft)}
             lastBuyer={lastBuyer || ''}
             winner={winner || ''}
