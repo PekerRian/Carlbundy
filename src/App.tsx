@@ -13,7 +13,7 @@ import { Navigation } from './components/Navigation';
 // Contract configuration
 export const MODULE_ADDRESS = "0x720757d34c77743730715fcf091f456e6840e32a077014d6883983ff7323c3ea";  // Account that published the module
 export const MODULE_NAME = "carlbundy9";  
-export const GAME_CREATOR = "0x030a49e550317d928495602ea9146550f90ec9808666fa5bd949e8ef9db5ff31";  // Account that created the game instance
+export const GAME_CREATOR = "0x720757d34c77743730715fcf091f456e6840e32a077014d6883983ff7323c3ea";  // Account that created the game instance
 const App: React.FC = () => {
   const { connected } = useWallet();
   const audioRef = useRef<HTMLAudioElement | null>(null);
