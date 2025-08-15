@@ -28,7 +28,7 @@ export function PlayGame() {
     timeLeft,
     isGameActive: started,
     winner
-  } = useGameEvents(GAME_CREATOR);
+  } = useGameEvents("0xb17eb45dc5dc6ffcf42ca9312e024d47fbb5db5203256b264a59ab26eee7a421");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
