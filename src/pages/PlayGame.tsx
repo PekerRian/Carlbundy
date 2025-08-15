@@ -22,13 +22,14 @@ export function PlayGame() {
   });
 
   // Use the real-time game events hook
-  const {
-    lastBuyer,
-    prizePool,
-    timeLeft,
-    isGameActive: started,
-    winner
-  } = useGameEvents("0xb17eb45dc5dc6ffcf42ca9312e024d47fbb5db5203256b264a59ab26eee7a421");
+    const {
+      lastBuyer,
+      prizePool,
+      timeLeft,
+      isGameActive: started,
+      winner,
+      ticketPrice
+    } = useGameEvents(GAME_CREATOR);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -134,7 +135,7 @@ export function PlayGame() {
             gameEnded={!started}
             gameStarted={started}
             prizePool={Number(prizePool)}
-            ticketPrice={Number(gameState.ticketPrice) / 1e8}
+            ticketPrice={Number(ticketPrice) / 1e8}
             timeLeft={Number(timeLeft)}
             lastBuyer={lastBuyer || ''}
             winner={winner || ''}
